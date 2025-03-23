@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --main-color: #294B52;
+    --secondary-color: #091112;
+    --desribtion-color: #595959;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+/* .container {
+    padding: 0 15px;
+    margin: 0 auto;
+} */
+
+@media (min-width: 768px) {
+    
+}
+
+@media (min-width: 992px) {
+    .menu-bar {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}
+
+/*-------------------------------- nav button ------------------------*/
+nav {
+    background-color: transparent !important;
+    
+}
+
+.nav-btn {
+    padding: 7px;
+    border-radius: 36px;
+    width: 150px;
+    color: white;
+}
+
+.nav-btn:first-child {
+    background-color: #B4D9D5;
+    color: #091112;
+}
+
+nav .nav-btn:last-child {
+    background-color: var(--main-color);
+}
+
+/*---------------------- Active link (page)------------------------*/
+nav .active {
+    color: var(--main-color) !important;
+    font-weight: bold;
+}
