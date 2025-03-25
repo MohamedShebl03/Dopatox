@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import '@popperjs/core/dist/umd/popper.min.js';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
