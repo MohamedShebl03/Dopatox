@@ -1,0 +1,411 @@
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #294B52;
+    --secondary-color: #091112;
+    --desribtion-color: #595959;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+/*-------------------------------- nav button ------------------------*/
+nav {
+    background-color: transparent !important;
+
+}
+
+.nav-btn {
+    padding: 7px;
+    border-radius: 36px;
+    width: 150px;
+    color: white;
+}
+
+.nav-btn:first-child {
+    background-color: #B4D9D5;
+    color: #091112;
+}
+
+nav .nav-btn:last-child {
+    background-color: var(--main-color);
+}
+
+/*---------------------- Active link (page)------------------------*/
+nav .active {
+    color: var(--main-color) !important;
+    font-weight: bold;
+}
+
+/*---------------------- Header------------------------*/
+
+/*--------------------------Left Section----------------------*/
+header .app-info h1 {
+    font-family: Gerbil;
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: var(--main-color);
+}
+
+header .app-info p {
+    font-size: 20px;
+    color: var(--desribtion-color);
+    margin-bottom: 30px;
+}
+
+/*----------------------------Right Section---------------------------*/
+.mobile-img {
+    max-width: 450px;
+}
+
+/*---------------- tags on Application image---------------*/
+.floating-tag {
+    font-family: Gerbil;
+    text-align: center;
+    color: var(--main-color);
+    width: 215px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    line-height: 120%;
+    animation: floatTogether 3s ease-in-out infinite;
+}
+
+.tag-top {
+    top: 25%;
+    right: 5%;
+}
+
+.tag-bottom {
+    bottom: 38%;
+    right: 5%;
+}
+
+.tag-middle {
+    top: 42%;
+    left: -15%;
+}
+
+/*-------------------- Animation of tags------------------*/
+@keyframes floatTogether {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/*---------------------------------End of Header---------------------*/
+
+section {
+    margin: 50px 0;
+    padding-bottom: 50px;
+}
+
+/*--------------------------------- Features ---------------------*/
+/*---------------------------------Features-txt ---------------------*/
+
+.header-section-txt span {
+    display: inline-block;
+    font-family: Gerbil;
+    background-color: #E8F3F2;
+    font-size: 17px;
+    width: 173px;
+    padding: 7px;
+    border-radius: 20px;
+    color: var(--main-color);
+}
+
+.header-section-txt h1 {
+    font-family: Raleway;
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--main-color);
+    margin: 20px 0;
+}
+
+/*---------------------------------Features - info ---------------------*/
+
+.features {
+    font-family: Raleway;
+    padding-top: 3rem;
+    margin: 50px 0;
+    overflow: hidden;
+}
+
+.features .f-descrip {
+    max-width: 600px;
+    padding-left: 50px;
+}
+
+.features .f-img {
+    max-width: 550px;
+}
+
+.features .f-descrip h2 {
+    font-size: 58px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.features .f-descrip p {
+    color: var(--desribtion-color);
+    max-width: 550px;
+}
+
+/*---------------------------------End of Feature---------------------*/
+
+/*---------------------------------FAQS---------------------*/
+
+/* إزالة تأثير التركيز ---outline--- */
+.accordion-button:focus {
+    box-shadow: none;
+    outline: none !important;
+}
+
+/* تنسيق زر العنوان  ------question ---*/
+.accordion-button {
+    background-color: transparent;
+    padding: 30px 10px;
+    font-size: 18px !important;
+    line-height: 24.55px;
+    color: #737373;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: none;
+}
+
+/* شكل الزر لما يكون مفتوح -- focus --- */
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--main-color);
+    font-weight: 700;
+
+}
+
+/* تغيير شكل الأيقونة  ---(+)---*/
+.accordion-button::after {
+    content: url(../image/Vector\ 438.png);
+    width: 14px;
+    height: 14px;
+    background-image: none !important;
+    transform: none !important;
+    transition: all 0.3s ease;
+}
+
+/* تغيير شكل الأيقونة  ---(<)---*/
+.accordion-button:not(.collapsed)::after {
+    content: url(../image/direction\ left.png);
+}
+
+/* ------container of All questions------*/
+.accordion {
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+/* ------الحامل بتاع السؤال والاجابه لكل سؤال------*/
+.accordion-item {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+
+/* ------Answer-------*/
+.accordion-body {
+    color: var(--desribtion-color);
+    font-size: 20px;
+    padding: 15px 10px;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /*--------------------------Header----------------------*/
+    /*--------------------------Left Section----------------------*/
+    header .app-info {
+        max-width: 400px;
+        text-align: center;
+        padding-left: 10px !important;
+        margin-bottom: 40px;
+    }
+
+    header .app-info h1 {
+        font-size: 24px;
+    }
+
+    header .app-info p {
+        font-size: 15px;
+    }
+
+    header .app-info a img {
+        width: 100px;
+    }
+
+    /*----------------------------Right Section---------------------------*/
+    .mobile-img {
+        margin: auto;
+        max-width: 300px;
+    }
+
+    .floating-tag {
+        width: 160px;
+        font-size: 10px;
+    }
+
+    .tag-middle {
+        top: 37%;
+        left: -3%;
+    }
+
+    /*--------------------------------- Features ---------------------*/
+    /*---------------------------------Features-txt ---------------------*/
+    .header-section-txt h1 {
+        font-size: 28px;
+    }
+
+    /*---------------------------------Features - info ---------------------*/
+    .features .f-descrip {
+        padding-left: 10px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .features .f-descrip h2 {
+        font-size: 20px;
+    }
+
+    .features .f-img {
+        text-align: center;
+    }
+
+    .features .f-img img:last-child {
+        width: 80%;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width:992px) {
+
+    /*--------------------------------Header----------------------*/
+    /*--------------------------Left Section----------------------*/
+    header .app-info h1 {
+        font-size: 27px;
+    }
+
+    header .app-info p {
+        font-size: 15px;
+    }
+
+    header .app-info a img {
+        width: 120px;
+    }
+
+    /*----------------------------Right Section---------------------------*/
+    .mobile-img {
+        max-width: 300px;
+    }
+
+    .floating-tag {
+        width: 160px;
+        font-size: 10px;
+    }
+
+    /*--------------------------------- Features ---------------------*/
+    /*---------------------------------Features-txt ---------------------*/
+    .header-section-txt h1 {
+        font-size: 38px;
+    }
+
+    /*---------------------------------Features - info ---------------------*/
+    .features .f-descrip h2 {
+        font-size: 30px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .menu-bar {
+        display: none;
+    }
+}
+
+@media (min-width: 992px)and (max-width: 1200px) {
+
+    /*--------------------------------Header------------------------*/
+    /*--------------------------Left Section----------------------*/
+    header .app-info h1 {
+        font-size: 30px;
+    }
+
+    header .app-info p {
+        font-size: 15px;
+    }
+
+    header .app-info a img {
+        width: 120px;
+    }
+
+    /*----------------------------Right Section---------------------------*/
+    .mobile-img {
+        max-width: 400px;
+    }
+
+    /*--------------------------------- Features ---------------------*/
+    /*---------------------------------Features-txt ---------------------*/
+    .header-section-txt h1 {
+        font-size: 45px;
+    }
+
+    /*---------------------------------Features - info ---------------------*/
+    .features .f-descrip h2 {
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 1200px) {}
