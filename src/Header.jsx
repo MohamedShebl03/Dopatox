@@ -13,7 +13,7 @@ function Header() {
   return (
     <>
         {/*!--Nav Bar--*/}
-    <nav className="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav className="header navbar navbar-expand-lg navbar-light sticky-top">
       <div className="container">
         {/*!--Logo--*/}
         <Link to='/' className="navbar-brand"><img src={logo} alt="logo" width="60" height="70" /></Link>
