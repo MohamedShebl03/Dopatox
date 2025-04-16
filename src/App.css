@@ -57,29 +57,171 @@ body {
 }
 
 /*-------------------------------- nav button ------------------------*/
-nav {
+nav.header {
     background-color: transparent !important;
     
 }
 
-.nav-btn {
+.header .nav-btn {
     padding: 7px;
     border-radius: 36px;
     width: 150px;
     color: white;
 }
 
-.nav-btn:first-child {
+.header .nav-btn:first-child {
     background-color: #B4D9D5;
     color: #091112;
 }
 
-nav .nav-btn:last-child {
+.header .nav-btn:last-child {
     background-color: var(--main-color);
 }
 
 /*---------------------- Active link (page)------------------------*/
-nav .active {
+.header .active {
     color: var(--main-color) !important;
     font-weight: bold;
+}
+
+
+
+/*------------------- SignUp ------------- */
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f4fafa;
+}
+
+/*----------nav---------*/
+nav.SignNav{
+    background-color: #E8F3F2 !important;
+    margin: 10px !important;
+    padding: 20px 15px !important;
+    border-radius: 15px !important
+}
+
+.SignNav a span {
+    padding: 10px;
+    font-family: Gerbil !important;
+    font-size: 20px;
+    color: var(--main-color);
+}
+
+.SignNav button {
+    background-color: var(--main-color);
+    color: #F9F9F9;
+    width: 120px;
+    height: 50px;
+    border-radius: 60px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+/*-------------------------Form SignUp/in------------------------*/
+
+
+.sign-box {
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 30px;
+    border-radius: 15px;
+   
+}
+
+
+
+.sign-box .form-logo h2 {
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--main-color);
+}
+
+
+
+
+.sign-box form input {
+    border-radius: 30px !important;
+    padding: 10px 20px;
+    outline: none;
+}
+
+.sign-box form input:focus {
+    box-shadow: 0px 0px 0px 2px #007c70;
+}
+
+.sign-box .btn-submit {
+    border-radius: 30px;
+    padding: 10px;
+    background-color: #2f4f4f;
+    color: white;
+    width: 100%;
+}
+
+.sign-box .btn-submit:hover {
+    background-color: #1e3636;
+    color: #fff;
+}
+
+
+.sign-box .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.sign-box .form-text {
+    color: var(--desribtion-color);
+    font-size: 16px;
+    font-weight: 500;
+}
+.sign-box .form-text a {
+    color: var(--main-color);
+
+}
+
+@media (max-width: 768px) {
+
+    /*----------nav---------*/
+    nav a span {
+        font-size: 14px;
+    }
+
+    nav button {
+        width: 80px;
+        font-size: 12px;
+    }
+
+
+    /*--------Form LOGO-------*/
+
+.sign-box .form-logo h2 {
+    font-size: 40px;
+}
+
 }
