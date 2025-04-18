@@ -2,6 +2,7 @@ import logo from '../assets/logo.svg'
 import email from '../assets/mail-01.png'
 import view from '../assets/view.png'
 import viewoff from '../assets/view-off-slash.png'
+import { Link } from 'react-router-dom';
 function SignUp(){
     return(
         <>
@@ -44,7 +45,7 @@ function SignUp(){
                    </div>
                    <button type="submit" className="btn btn-submit">Submit</button>
                 </form>
-               <div class="form-text mt-3">Have an account? <a href="#">sign in</a></div>
+               <div class="form-text mt-3">Have an account? <Link to='/signin'>sign in</Link></div>
            </div>
         </>
     )
