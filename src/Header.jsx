@@ -96,7 +96,7 @@ function Header() {
           {/*!--Buttons--*/}
           <div className="ms-auto">
             <button className="nav-btn me-2" onClick={() => navigate("./ContactUs.jsx")}>Contact Us</button>
-            <button className="nav-btn" onClick={() => navigate("./Login.jsx")}>Login</button>
+            <button className="nav-btn" onClick={() => navigate("./SignIn.jsx")}>Login</button>
           </div>
           {/*!------------------------------*/}
         </div>
