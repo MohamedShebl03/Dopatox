@@ -17,7 +17,7 @@ function SignIn(){
   useEffect(() =>{
     console.log("User in effect: ", user)
     if(user) {
-      navigate("/home" , {replace:true})
+      navigate("/dashboard" , {replace:true})
     }
   }, [user, navigate])
   const handleInputChange = (e,formSetter) => {
@@ -31,12 +31,12 @@ function SignIn(){
         toast.error("Please fill all fields!");
         return;
       }
-      console.log("omar" ,signInData);
+      console.log("nada" ,signInData);
     try{
       const response = await signIn(signInData)
       console.log("nada", response);
       toast.success(`welcome! Your account has been created successfully.`)
-      navigate("/home")
+      navigate("/dashboard")
 
     }catch (error){
       console.error (`${action} failed:` , error)
@@ -77,7 +77,7 @@ function SignIn(){
                    
                    <button type="submit" className="btn btn-submit mt-3">Submit</button>
                 </form>
-               <div class="form-text mt-3">Don't Have an account? <a href="#">sign up</a></div>
+               <div className="form-text mt-3">Don't Have an account? <a href="#">sign up</a></div>
            </div>
         </>
     )

@@ -11,7 +11,7 @@ function SignUp(){
   const [signUpData,setSignUpData] = useState({
     firstName: "",
     lastName: "",
-    userName:"test3252",
+    userName:"mooodaa",
     email:"",
     password:"",
     dateOfBirth:"2025-04-19"
@@ -29,7 +29,7 @@ function SignUp(){
     const {name, value} = e.target 
     formSetter((prev) => ({ ...prev, [name]: value}))
   }
-  const handleSubmit = async (e, action) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     // if (signUpData.password !== signUpData.confirmPassword) {
@@ -41,26 +41,23 @@ function SignUp(){
       toast.error("Please fill all fields!");
       return;
     }
-    console.log("omar" ,signUpData);
+    console.log("nada" ,signUpData);
     
     try{
      const response =  await signUp(signUpData)
      console.log("nada", response);
-       toast.success(`welcome ${signUpData.userName}! Your account has been created successfully.`)
-      navigate("/")
+       toast.success(`welcome ${signUpData.userName}! Please verify your email.`)
+
+      navigate(`/verify?email=${signUpData.email}`)
 
     }catch (error){
-      console.error(`${action} failed:`, error);
+      console.error(`failed:`, error);
       toast.error(
         error?.response?.data?.message || "An unexpected error occurred."
       );
 
     }
   }
-
-  
-
-
 
     return(
         <>
@@ -115,7 +112,7 @@ function SignUp(){
                    </div> */}
                    <button type="submit" className="btn btn-submit" >Submit</button>
                 </form>
-               <div class="form-text mt-3">Have an account? <a onClick={() => navigate("/signin")}>sign in</a></div>
+               <div className="form-text mt-3">Have an account? <a onClick={() => navigate("/signin")}>sign in</a></div>
            </div>
         </>
     )

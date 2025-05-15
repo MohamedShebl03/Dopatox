@@ -1,5 +1,4 @@
 import { useAuthStore } from "../stores/authStoreB"
-
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "react-toastify";
 import {
@@ -7,7 +6,9 @@ import {
     signUp,
     logout,
     forgotPassword,
-    getUser,
+    resetPassword,
+    verifyCode
+    
 
 } from "../api/auth"
 
@@ -27,7 +28,7 @@ function useAuth(){
             return response
         },
         onSuccess: (data) =>{
-            setUser(data)
+            setUser(data.user,data.token)
         },
         onError: (error) =>{
             console.error("Sign-in error:", handleError(error))
@@ -41,13 +42,35 @@ function useAuth(){
             
             return response
         },
-        onSuccess: (data) =>{
-            setUser(data)
+        onSuccess: () =>{
+            toast.success("Account created successfully! Please verify your email.")
         },
        
         onError: (error) =>{
             console.error("Sign-up error:", handleError(error))
         }
+    })
+
+    const verifyCodeMutation = useMutation({
+        mutationFn:async (verifyData) =>{
+            const response = await verifyCode(verifyData)
+            return response
+        } ,
+        
+        onSuccess: (data) => {
+            if (!data || !data.user || !data.token) {
+              toast.error("Invalid response from server");
+              return;
+            }  
+            setUser(data.user, data.token);
+          },
+          onError: (error) => {
+            toast.error(
+                error?.response?.data?.message || "Invalid code or email. Try again."
+              )
+              console.error("verify code error:", error)
+           
+          },
     })
 
     const signOutMutation = useMutation({
@@ -56,9 +79,11 @@ function useAuth(){
         },
         onSuccess: ()=>{
             logoutFromStore()
+            toast.success("Logged out successfully")
         },
         onError: (error) => {
-            console.error("Sign-out error:", handleError(error));
+            toast.error(handleError(error) || "Sign-out failed. Please try again.")
+            console.error("Sign-out error:", handleError(error))
         }
 
     })
@@ -108,25 +133,28 @@ function useAuth(){
 
     return{
         user,
-        isAuthenticated: !!user,
+        isAuthenticated: !!user ,
         signIn:signInMutation.mutateAsync,
         signUp:signUpMutation.mutateAsync,
         signOut:signOutMutation.mutateAsync,
         forgotPassword: forgotPasswordMutation.mutateAsync,
         resetPassword: resetPasswordMutation.mutateAsync,
+        verifyCode: verifyCodeMutation.mutateAsync,
         
         isLoading:
             signInMutation.isPending ||
             signUpMutation.isPending ||
             signOutMutation.isPending ||
-            forgotPasswordMutation.isPending,
+            forgotPasswordMutation.isPending ||
+            verifyCodeMutation.isPending,
            
            
         signInError: signInMutation.error,
         signUpError: signUpMutation.error,
         signOutError: signOutMutation.error,
         forgotPasswordError: forgotPasswordMutation.error,
-        resetPasswordError: resetPasswordMutation.error,   
+        resetPasswordError: resetPasswordMutation.error,
+        verifyCodeError: verifyCodeMutation.error,
 
 
     }
