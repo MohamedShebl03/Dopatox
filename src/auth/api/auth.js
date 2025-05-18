@@ -3,13 +3,15 @@ import axios  from "axios";
 const API = axios.create({
     baseURL:"https://api.dopatox.site/api/Auth"
 })
-let refreshPromise = null;
+const getAccessToken = () => localStorage.getItem("accessToken");
+const getRefreshToken = () => localStorage.getItem("refreshToken");
+
 
 API.interceptors.request.use(
-    async (config) => {
-        const accessToken = localStorage.getItem("accessToken")
-        if (accessToken){
-            config.headers.Authorization = `Bearer ${accessToken}`
+    (config) => {
+       const token = getAccessToken()
+        if (token){
+            config.headers.Authorization = `Bearer ${token}`
         }
         return config
     },
@@ -25,47 +27,35 @@ API.interceptors.response.use(
             (error.response?.status === 401 || error.response?.status === 403)&&
             !originalRequest._retry &&
             !originalRequest.url.includes("/login")&&
-            !originalRequest.url.includes("/signUp")&&
-            !originalRequest.url.includes("/refresh")
-        ){
+            !originalRequest.url.includes("/signUp")
+        )
+            
+        {
             originalRequest._retry = true
-            if (!refreshPromise) {
-                const refreshToken = localStorage.getItem("refreshToken")
-                if (!refreshToken) {
-                    window.location.href = "/signin"
-                    return Promise.reject("No refresh token found. Redirecting to login")
-                }
+            try {
+                const refreshToken = getRefreshToken();
+                const res = await axios.post("https://api.dopatox.site/api/Auth/refresh", {
+                  token: refreshToken,
+                });
+                const {accessToken} = res.data
+                localStorage.setItem("accessToken", accessToken)
 
-                refreshPromise = axios.post("https://api.dopatox.site/api/Auth/refresh",{token: refreshToken})
-                .then((res) => {
-                    const newAccessToken = res.data.accessToken
-                    localStorage.setItem("accessToken", newAccessToken)
-                })
-                .catch((refreshError) => {
-                    console.error("Token refresh failed:", refreshError);
-                    window.location.href = "/signin";
-                    return Promise.reject(refreshError);        
-
-                })
-                .finally(() =>{
-                    refreshPromise = null
-                })
+                originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+                return API(originalRequest); 
+              } catch (refreshError) {
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                window.location.href = "/login";
+                return Promise.reject("Session expired, please log in again.");
+              }
             }
-
-            try{
-                await refreshPromise
-                const newAccessToken = localStorage.getItem("accessToken")
-                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
-                return API(originalRequest)
-
-            } catch(err){
-                return Promise.reject("Session expired, please log in again.")
-
-            }
+        
+            return Promise.reject(error)
         }
-        return Promise.reject(error)
-    }
-)
+    )
+
+            
+
 
 
 
@@ -76,22 +66,35 @@ export const getUser = async () =>{
     const {user} = res.data
     return {user}
 }
-export const signUp = (userData) => API.post("/SignUp", userData)
+export const signUp = async (userData) => {
+  const response = await API.post("/SignUp" , userData)
+  return response.data
+}
 
 
 export const signIn = async (Credentials) =>{
     const response = await API.post("/login",Credentials)
     console.log(response);
-    const {accessToken} = response.data
-    localStorage.setItem("accessToken" , accessToken)
+    const {token, refreshToken,userName,email,roles} = response.data
+    const user = {userName,email,roles}
+    localStorage.setItem("accessToken" ,token)
     localStorage.setItem("refreshToken",refreshToken)
-    return response.data
+    return {user, token}
+}
+  
+export const logout = () => API.post("/logout")
+
+export const verifyCode = async (verifyData) => {
+        const response = await API.post("/VerifyCode",  verifyData)
+        const { userName, email, token,refreshToken, roles } = response.data
+        const user = {userName,email,roles}
+        localStorage.setItem("accessToken", token)
+        localStorage.setItem("refreshToken", refreshToken)
+        return {user,token}
+        
+   
 }
 
-export const logout = () =>{
-    localStorage.removeItem("accessToken")
-    localStorage.removeItem("refreshToken")
-}
 
 export const forgotPassword = async (email) =>{
     try{

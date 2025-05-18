@@ -11,6 +11,8 @@ import LayoutAuth from './auth/LayoutAuth';
 import LayoutProject from './LayoutProject';
 import ProtectedRoutes from './utils/ProjectedRoutes';
 import { ToastContainer } from "react-toastify";
+import Dashboard from './Dashboard';
+import VerifyCode from './auth/VerifyCode';
 
 function App() {
   
@@ -22,6 +24,7 @@ function App() {
       <Route element={<ProtectedRoutes />}>
         <Route path="/" element={<LayoutProject />}>
          <Route index element={<Home/>} />
+         <Route path='dashboard' element={<Dashboard/>}></Route>
          <Route path='Blog.jsx' element={<Blog />}></Route>
          <Route path='Features.jsx' element={<Features />}></Route>
          <Route path='AboutUs.jsx' element={<AboutUs />}></Route>
@@ -32,6 +35,7 @@ function App() {
         <Route  element={<LayoutAuth />}>
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path='/verify' element={<VerifyCode/>}/>
        </Route>
      </Route>
 

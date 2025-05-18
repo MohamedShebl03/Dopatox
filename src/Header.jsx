@@ -1,15 +1,27 @@
 import logo from './assets/logo.svg'
 import { Link , useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useAuth from './auth/Hooks/useAuth';
+import { useAuthStore } from './auth/stores/authStoreB';
 
 
 function Header() {
     const [active, setActive] = useState("/");
+    const {signOut, isLoading} = useAuth()
+    const {user} = useAuthStore()
     const navigate = useNavigate();
     const CloseMenu = () => {
     document.querySelector(".offcanvas.show")?.classList.remove("show");
     document.querySelector(".offcanvas-backdrop")?.classList.remove("show");
   };
+  const handleLogout = async () =>{
+    try{
+      await signOut()
+
+    } catch (error) {
+      toast.error(`Logout failed: ${error.message}`);
+    }
+  }
   return (
     <>
         {/*!--Nav Bar--*/}
@@ -96,7 +108,7 @@ function Header() {
           {/*!--Buttons--*/}
           <div className="ms-auto">
             <button className="nav-btn me-2" onClick={() => navigate("./ContactUs.jsx")}>Contact Us</button>
-            <button className="nav-btn" onClick={() => navigate("./SignIn.jsx")}>Login</button>
+            <button className="nav-btn me-2" onClick={handleLogout}>logout</button>
           </div>
           {/*!------------------------------*/}
         </div>
